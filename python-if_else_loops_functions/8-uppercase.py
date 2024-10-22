@@ -1,8 +1,10 @@
-#!/usr/bin/python3 
-def uppercase(str1):?
-for char in str1:
-    if 123 > ord(char) > 96:
-        char = chr(ord(char) -32)
-        print('{}'.format(char),end="")
-        print('')
+#!/usr/bin/python3
+def uppercase(str):
+    for i in str:
+        letter = ord(i)
+        if 97 <= ord(i) <= 123:
+            letter = ord(i) - 32
 
+        print("{:c}".format(letter), end="")
+
+    print("")
