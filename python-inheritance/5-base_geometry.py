@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""Empty BaseGeometry class"""
+'''this is an empty class '''
 
 
 class BaseGeometry:
-    """Class empty"""
+    ''' emprtyt  hsksnjsnsjs'''
     pass
