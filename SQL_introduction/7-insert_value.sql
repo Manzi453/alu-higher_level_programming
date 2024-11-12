@@ -1,2 +1,2 @@
--- insert data in table 
+-- insert into
 INSERT INTO first_table(id, name) VALUES(89, 'Holberton School');
