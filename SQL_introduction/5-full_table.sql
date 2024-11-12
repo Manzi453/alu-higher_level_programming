@@ -1,2 +1,3 @@
----list of full table 
-SHOW CREATE  TABLE  first_table;
+---list of full table
+SHOW CREATE TABLE first_table;
+
