@@ -1,3 +1,2 @@
----list of full table
+-- FULL DESCRIPTION
 SHOW CREATE TABLE first_table;
-
