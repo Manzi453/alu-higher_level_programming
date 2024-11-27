@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-# Test for rectangle.py
-"""
-    Defines unittests for models/rectangle.py.
+""" 
+define  unittests for models/rectangle.py.
     Unittest classes:
         TestRectangle_instantiation
         TestRectangle_width
