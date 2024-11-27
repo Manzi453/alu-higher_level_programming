@@ -1,13 +1,11 @@
 import csv
-import json
 
 class Base:
-    """Base class for managing ID and serialization."""
-
+    """Base class for serialization and deserialization."""
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """Initialize a new Base object."""
+        """Initialize a Base instance."""
         if id is not None:
             self.id = id
         else:
@@ -16,35 +14,54 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """Serialize a list of objects to a CSV file."""
+        """Save a list of objects to a CSV file."""
         filename = f"{cls.__name__}.csv"
-        with open(filename, mode="w", newline="") as csv_file:
+        with open(filename, "w", newline="") as csv_file:
             writer = csv.writer(csv_file)
-
-            if cls.__name__ == "Rectangle":
+            if list_objs is None or len(list_objs) == 0:
+                writer.writerow([])  # Empty list, write nothing
+            else:
                 for obj in list_objs:
-                    writer.writerow([obj.id, obj.width, obj.height, obj.x, obj.y])
-            elif cls.__name__ == "Square":
-                for obj in list_objs:
-                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
+                    writer.writerow(obj.to_dictionary().values())  # Use to_dictionary() for serialization
 
     @classmethod
     def load_from_file_csv(cls):
-        """Deserialize a list of objects from a CSV file."""
+        """Load a list of objects from a CSV file."""
         filename = f"{cls.__name__}.csv"
-        obj_list = []
         try:
-            with open(filename, mode="r", newline="") as csv_file:
+            with open(filename, "r", newline="") as csv_file:
                 reader = csv.reader(csv_file)
-
-                if cls.__name__ == "Rectangle":
-                    for row in reader:
-                        obj_list.append(cls(int(row[1]), int(row[2]), int(row[3]), int(row[4]), int(row[0])))
-                elif cls.__name__ == "Square":
-                    for row in reader:
-                        obj_list.append(cls(int(row[1]), int(row[2]), int(row[3]), int(row[0])))
+                obj_list = []
+                for row in reader:
+                    # Convert row into object dictionary and recreate object
+                    if cls.__name__ == "Rectangle":
+                        obj_dict = {
+                            "id": int(row[0]),
+                            "width": int(row[1]),
+                            "height": int(row[2]),
+                            "x": int(row[3]),
+                            "y": int(row[4]),
+                        }
+                    elif cls.__name__ == "Square":
+                        obj_dict = {
+                            "id": int(row[0]),
+                            "size": int(row[1]),
+                            "x": int(row[2]),
+                            "y": int(row[3]),
+                        }
+                    obj = cls.create(**obj_dict)  # Create instance
+                    obj_list.append(obj)
+                return obj_list
         except FileNotFoundError:
-            return []
+            return []  # Return empty list if file is not found
 
-        return obj_list
+    @classmethod
+    def create(cls, **dictionary):
+        """Create a new instance with attributes from a dictionary."""
+        if cls.__name__ == "Rectangle":
+            obj = cls(1, 1)  # Temporary values for width and height
+        elif cls.__name__ == "Square":
+            obj = cls(1)  # Temporary value for size
+        obj.update(**dictionary)
+        return obj
 
