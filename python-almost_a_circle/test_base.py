@@ -1,4 +1,5 @@
-t for base.py
+#!/usr/bin/python3
+"""class for base.py"""
 """
     Define unittests for 'base.py'
     Unittest classes:
