@@ -1,4 +1,7 @@
-mport urllib.request
+#!/usr/bin/python3
+"""I documented you"""
+
+import urllib.request
 import sys
 
 if __name__ == '__main__':
