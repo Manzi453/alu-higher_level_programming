@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Script that lists all values in the `states` table of `hbtn_0e_0_usa`
+Sccript that lists all values in the `states` table of `hbtn_0e_0_usa`
 where `name` matches the argument `state name searched`.
 Arguments:
     mysql username (str)
